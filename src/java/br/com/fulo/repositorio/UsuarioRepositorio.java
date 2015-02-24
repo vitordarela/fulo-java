@@ -76,9 +76,6 @@ public class UsuarioRepositorio {
             // persiste usuario.
             manager.persist(usuario);
 
-            manager.flush();
-            manager.clear();
-
             // commita.
             manager.getTransaction().commit();
 

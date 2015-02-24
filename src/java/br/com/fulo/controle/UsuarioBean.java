@@ -100,6 +100,7 @@ public class UsuarioBean {
 
             // instancia um novo usuario para não popular o formulário com dados antigos.
             pessoa = new Pessoa();
+            usuario = new Usuario();
 
             // apresenta mensagem de sucesso.
             ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
