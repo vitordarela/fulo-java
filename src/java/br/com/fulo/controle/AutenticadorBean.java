@@ -72,7 +72,7 @@ public class AutenticadorBean {
             Usuario usuario = (Usuario) resultado.get(0);
 
             // verifica se as credenciais estao certas.
-            if (usuario.getPessoa().getDs_email().equals(ds_email) && usuario.getDs_senha().equals(business.converteMD5(ds_senha))) {
+            if (usuario.pessoa.getDs_email().equals(ds_email) && usuario.getDs_senha().equals(business.converteMD5(ds_senha))) {
 
                 // inicia a sessão.
                 ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();

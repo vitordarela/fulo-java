@@ -26,8 +26,6 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * Classe responsável pelas funções de usuário
@@ -41,17 +39,13 @@ import javax.validation.constraints.Size;
 @RequestScoped
 public class UsuarioBean {
 
-    // variável para usar na hora de comparar a senha.
-    @NotNull
-    @Size(min = 4, max = 10)
-    private String senha;
-
-    // instancia a classe pessoa.
+    // instancia a classe usuario e pessoa.
     private Usuario usuario = new Usuario();
     private Pessoa pessoa = new Pessoa();
 
     public UsuarioBean() {
-        usuario.setSq_perfil(new Perfil());
+        usuario.setPerfil(new Perfil());
+        usuario.setPessoa(new Pessoa());
     }
 
     // instancia a business de usuário.
@@ -72,7 +66,7 @@ public class UsuarioBean {
         try {
 
             // verifica se a senha confere.
-            if (!usuario.getDs_senha().trim().equals(this.senha)) {
+            if (!usuario.getDs_senha().trim().equals(usuario.getConfirma_senha())) {
 
                 // apresenta mensagem de erro.
                 ELFlash.getFlash().put("erro", Mensagens.MSG0004);
@@ -132,6 +126,7 @@ public class UsuarioBean {
 
         // verifica se tem resultado.
         if (resultado.isEmpty()) {
+
             // apresenta mensagem de erro.
             ELFlash.getFlash().put("info", Mensagens.MSG0006);
         }
@@ -161,9 +156,9 @@ public class UsuarioBean {
 
         try {
 
-            Pessoa resultado = business.buscarDadosId(sq_pessoa);
+            Usuario resultado = business.buscarDadosId(sq_pessoa);
 
-            setPessoa(resultado);
+            setUsuario(resultado);
 
             return "/usuario/editar.xhtml";
 
@@ -196,16 +191,16 @@ public class UsuarioBean {
             if (!pesquisa.isEmpty()) {
 
                 // pega o id de pessoa.
-                Integer sq_pessoa = this.pessoa.getSq_pessoa();
+                Integer sq_pessoa = usuario.getSq_pessoa();
 
                 // pesquisa dados antigos.
-                Pessoa antigos = business.buscarDadosId(sq_pessoa);
+                Usuario antigos = business.buscarDadosId(sq_pessoa);
 
                 // pega email do banco.
-                Pessoa email = (Pessoa) pesquisa.get(0);
+                Usuario email = (Usuario) pesquisa.get(0);
 
                 // compara emails.
-                if (pessoa.getDs_email().equals(email.getDs_email()) && !pessoa.getDs_email().equals(antigos.getDs_email())) {
+                if (usuario.pessoa.getDs_email().equals(email.pessoa.getDs_email()) && !usuario.pessoa.getDs_email().equals(antigos.pessoa.getDs_email())) {
 
                     // apresenta mensagem de erro.
                     ELFlash.getFlash().put("erro", Mensagens.MSG0005);
@@ -217,7 +212,7 @@ public class UsuarioBean {
             }
 
             // manda dados para a business
-            business.editarUsuario(pessoa);
+            business.editarUsuario(usuario);
 
             // apresenta mensagem de sucesso.
             ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
@@ -273,22 +268,6 @@ public class UsuarioBean {
 
         }
 
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getSenha() {
-        return senha;
-    }
-
-    /**
-     *
-     * @param senha
-     */
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public UsuarioBusiness getBusiness() {

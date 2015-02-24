@@ -145,7 +145,7 @@ public class UsuarioRepositorio {
         try {
 
             // monta a query com entity manager.
-            Query query = manager.createQuery("SELECT p FROM Pessoa p WHERE p.ds_email = :ds_email");
+            Query query = manager.createQuery("SELECT u FROM Usuario u WHERE u.pessoa.ds_email = :ds_email");
 
             // monta a clausula where.
             query.setParameter("ds_email", ds_email);
@@ -165,16 +165,16 @@ public class UsuarioRepositorio {
      * @name pesquisaPorId
      * @author Victor Eduardo Barreto
      * @throws java.lang.Exception
-     * @param id Identificador do registro
+     * @param sq_pessoa Identificador do registro
      * @return object Dados de usuário
      * @date Nov 20, 2014
      * @version 1.0
      */
-    public Pessoa pesquisaPorId(Integer sq_pessoa) throws Exception {
+    public Usuario pesquisaPorId(Integer sq_pessoa) throws Exception {
 
         try {
 
-            return manager.find(Pessoa.class, sq_pessoa);
+            return manager.find(Usuario.class, sq_pessoa);
         } catch (Exception exception) {
             throw exception;
         }
@@ -191,7 +191,7 @@ public class UsuarioRepositorio {
      * @date Jan 29, 2015
      * @version 1.0
      */
-    public void edita(Pessoa pessoa) throws Exception {
+    public void edita(Usuario usuario) throws Exception {
 
         try {
 
@@ -199,7 +199,7 @@ public class UsuarioRepositorio {
             manager.getTransaction().begin();
 
             // atualiza usuário.
-            manager.merge(pessoa);
+            manager.merge(usuario);
 
             // commita.
             manager.getTransaction().commit();
@@ -227,12 +227,12 @@ public class UsuarioRepositorio {
      *
      * @name remove
      * @author Victor Eduardo Barreto
-     * @param pessoa Dados de usuário
+     * @param usuario Dados de usuário
      * @throws java.lang.Exception
      * @date Jan 29, 2015
      * @version 1.0
      */
-    public void remove(Pessoa pessoa) throws Exception {
+    public void remove(Usuario usuario) throws Exception {
 
         try {
 
@@ -240,7 +240,7 @@ public class UsuarioRepositorio {
             manager.getTransaction().begin();
 
             // remove usuário.
-            manager.remove(pessoa);
+            manager.remove(usuario);
 
             // commita.
             manager.getTransaction().commit();

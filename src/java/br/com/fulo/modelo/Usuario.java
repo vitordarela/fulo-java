@@ -13,11 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Descrição da classe
+ * Modelo de usuario
  *
  * @name Usuario
  * @author Victor Eduardo Barreto
@@ -37,9 +38,14 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 32)
     private String ds_senha;
 
+    @NotNull
+    @Size(min = 4, max = 10)
+    @Transient
+    private String confirma_senha;
+
     @JoinColumn(name = "sq_perfil", referencedColumnName = "sq_perfil")
     @ManyToOne(optional = false)
-    private Perfil sq_perfil;
+    private Perfil perfil;
 
     @JoinColumn(name = "sq_pessoa", referencedColumnName = "sq_pessoa", insertable = false, updatable = false)
     @OneToOne(optional = false)
@@ -73,12 +79,12 @@ public class Usuario implements Serializable {
         this.ds_senha = ds_senha;
     }
 
-    public Perfil getSq_perfil() {
-        return sq_perfil;
+    public Perfil getPerfil() {
+        return perfil;
     }
 
-    public void setSq_perfil(Perfil sq_perfil) {
-        this.sq_perfil = sq_perfil;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     public Pessoa getPessoa() {
@@ -87,6 +93,14 @@ public class Usuario implements Serializable {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public String getConfirma_senha() {
+        return confirma_senha;
+    }
+
+    public void setConfirma_senha(String confirma_senha) {
+        this.confirma_senha = confirma_senha;
     }
 
 }

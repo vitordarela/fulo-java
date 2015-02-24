@@ -103,14 +103,14 @@ public class UsuarioBusiness extends AbstractBusiness {
      * @name buscarDadosId
      * @author Victor Eduardo Barreto
      * @throws java.lang.Exception
-     * @param id Identificador do registro
+     * @param sq_pessoa Identificador do registro
      * @return object Dados de usuário
      * @date Jan 26, 2015
      * @version 1.0
      */
-    public Pessoa buscarDadosId(Integer id) throws Exception {
+    public Usuario buscarDadosId(Integer sq_pessoa) throws Exception {
 
-        return repositorio.pesquisaPorId(id);
+        return repositorio.pesquisaPorId(sq_pessoa);
     }
 
     /**
@@ -118,15 +118,15 @@ public class UsuarioBusiness extends AbstractBusiness {
      *
      * @name editarUsuario
      * @author Victor Eduardo Barreto
-     * @param usuario Dados de usuário
+     * @param pessoa Dados de usuário
      * @throws java.lang.Exception
      * @date Jan 29, 2015
      * @version 1.0
      */
-    public void editarUsuario(Pessoa pessoa) throws Exception {
+    public void editarUsuario(Usuario usuario) throws Exception {
 
         // envia para o repositorio.
-        repositorio.edita(pessoa);
+        repositorio.edita(usuario);
     }
 
     /**
@@ -135,17 +135,17 @@ public class UsuarioBusiness extends AbstractBusiness {
      * @name removerUsuario
      * @author Victor Eduardo Barreto
      * @throws java.lang.Exception
-     * @param sq_usuario
+     * @param sq_pessoa
      * @date Jan 30, 2015
      * @version 1.0
      */
     public void removerUsuario(Integer sq_pessoa) throws Exception {
 
         // recupera dados do usuário.
-        Pessoa pessoa = buscarDadosId(sq_pessoa);
+        Usuario usuario = buscarDadosId(sq_pessoa);
 
         // manda para a camada repositório.
-        repositorio.remove(pessoa);
+        repositorio.remove(usuario);
 
     }
 

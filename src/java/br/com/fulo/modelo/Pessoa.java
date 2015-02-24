@@ -16,9 +16,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
 
 /**
- * Descrição da classe
+ * Modelo de pessoa
  *
  * @name Pessoa
  * @author Victor Eduardo Barreto
@@ -41,6 +42,7 @@ public class Pessoa implements Serializable {
 
     @Basic(optional = false)
     @NotNull
+    @Email
     @Size(min = 1, max = 45)
     private String ds_email;
 

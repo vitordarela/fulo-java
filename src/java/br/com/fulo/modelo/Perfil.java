@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * Descrição da classe
+ * Modelo de perfil
  *
  * @name Perfil
  * @author Victor Eduardo Barreto
@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @version 1.0
  */
 @Entity
-@Table(name = "perfil")
+@Table(name = "perfil", schema = "dominio")
 public class Perfil implements Serializable {
 
     @Id
@@ -41,7 +41,7 @@ public class Perfil implements Serializable {
     @Size(min = 1, max = 45)
     private String de_perfil;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sq_perfil")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "perfil")
     private Collection<Usuario> usuarioCollection;
 
     public Perfil() {

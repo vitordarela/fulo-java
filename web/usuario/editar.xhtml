@@ -29,15 +29,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <h:form class="form-horizontal">
 
             <!--campos hidden-->
-            <h:inputHidden value="#{usuarioBean.usuario.sq_usuario}" />
+            <h:inputHidden value="#{usuarioBean.usuario.sq_pessoa}" />
             <h:inputHidden value="#{usuarioBean.usuario.ds_senha}" />
+            <h:inputHidden value="#{usuarioBean.usuario.perfil.sq_perfil}" />
             <!--campos hidden-->
 
             <div class="form-group">
                 <h:outputLabel class="col-sm-2 control-label" value="Nome:" for="campo-nome" />
 
                 <div class="col-sm-4">
-                    <h:inputText class="form-control" p:placeholder="Nome e sobrenome" id="campo-nome" value="#{usuarioBean.usuario.ds_nome}">
+                    <h:inputText class="form-control" p:placeholder="Nome e sobrenome" id="campo-nome" value="#{usuarioBean.usuario.pessoa.ds_nome}">
                     </h:inputText>
 
                     <h:message class="text-danger" for="campo-nome"/>
@@ -50,7 +51,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <h:outputLabel class="col-sm-2 control-label" value="E-mail" for="campo-email" />
 
                 <div class="col-sm-4">
-                    <h:inputText class="form-control" p:placeholder="usuario@email.com" id="campo-email" value="#{usuarioBean.usuario.ds_email}"/>
+                    <h:inputText class="form-control" p:placeholder="usuario@email.com" id="campo-email" value="#{usuarioBean.usuario.pessoa.ds_email}"/>
 
                     <h:message class="text-danger" for="campo-email"/>
                 </div>

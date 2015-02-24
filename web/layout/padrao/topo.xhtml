@@ -184,9 +184,9 @@
                         <h:form>
 
                             <h:commandLink class="btn navbar-btn text-info" rendered="#{(!empty(autenticadorBean.recuperaSessao()))}" action="#{usuarioBean.preparaEdicao()}">
-                                <f:param name="sq_usuario" value="#{autenticadorBean.recuperaSessao().getSq_usuario()}"></f:param>
+                                <f:param name="sq_pessoa" value="#{autenticadorBean.recuperaSessao().getSq_pessoa()}"></f:param>
                                 <i class="glyphicon glyphicon-user"></i>
-                                <strong><h:outputText value=" #{autenticadorBean.recuperaSessao().getDs_nome()}" /></strong>
+                                <strong><h:outputText value=" #{autenticadorBean.recuperaSessao().pessoa.getDs_nome()}" /></strong>
 
                             </h:commandLink>
 

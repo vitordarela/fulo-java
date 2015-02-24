@@ -4,12 +4,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
 <dbmodel>
+<schema name="dominio">
+</schema>
+
 <database name="fulo" encoding="UTF8">
 </database>
 
 <table name="pessoa" oids="false">
 	<schema name="public"/>
-	<position x="40" y="200"/>
+	<position x="40" y="193"/>
 	<column name="sq_pessoa" not-null="true">
 		<type name="integer" spatial-type="POINT" variation="0"/>
 	</column>
@@ -26,7 +29,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="usuario" oids="false">
 	<schema name="public"/>
-	<position x="440" y="200"/>
+	<position x="421" y="198"/>
 	<column name="sq_usuario" not-null="true">
 		<type name="integer" spatial-type="POINT" variation="0"/>
 	</column>
@@ -38,8 +41,8 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<table name="perfil" oids="false">
-	<schema name="public"/>
+<table name="perfil" oids="true">
+	<schema name="dominio"/>
 	<position x="800" y="200"/>
 	<column name="sq_perfil" not-null="true">
 		<type name="integer" spatial-type="POINT" variation="0"/>
@@ -47,7 +50,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="ds_perfil" not-null="true">
 		<type name="smallint" spatial-type="POINT" variation="0"/>
 	</column>
-	<constraint name="pk_perfil" type="pk-constr" factor="10" table="public.perfil">
+	<constraint name="pk_perfil" type="pk-constr" factor="10" table="dominio.perfil">
 		<columns names="sq_perfil" ref-type="src-columns"/>
 	</constraint>
 </table>
@@ -64,7 +67,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="public.pessoa"/>
 
 <constraint name="fk_usuario_perfil" type="fk-constr"	 comparison-type="MATCH FULL"
-	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.perfil" table="public.usuario">
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="dominio.perfil" table="public.usuario">
 	<columns names="sq_perfil" ref-type="src-columns"/>
 	<columns names="sq_perfil" ref-type="dst-columns"/>
 </constraint>
@@ -72,6 +75,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 type="relfk"
 	 src-required="false" dst-required="false"
 	 src-table="public.usuario"
-	 dst-table="public.perfil"/>
+	 dst-table="dominio.perfil"/>
 
 </dbmodel>

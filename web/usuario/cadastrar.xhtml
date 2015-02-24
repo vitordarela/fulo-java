@@ -70,7 +70,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <h:outputLabel class="col-sm-2 control-label" value="Repita a Senha" for="campo-repitasenha" />
 
                 <div class="col-sm-4">
-                    <h:inputSecret class="form-control" p:placeholder="Repita a senha" id="campo-repitasenha" value="#{usuarioBean.senha}"/>
+                    <h:inputSecret class="form-control" p:placeholder="Repita a senha" id="campo-repitasenha" value="#{usuarioBean.usuario.confirma_senha}"/>
 
                     <h:message class="text-danger" for="campo-repitasenha"/>
                 </div>
@@ -79,13 +79,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
             <!--campo perfil-->
             <div class="form-group">
+
                 <h:outputLabel class="col-sm-2 control-label" value="Perfil" for="campo-perfil" />
 
                 <div class="col-sm-4">
-                    <h:inputText class="form-control" p:placeholder="perfil" id="campo-perfil" value="#{usuarioBean.usuario.sq_perfil.sq_perfil}"/>
-
-                    <h:message class="text-danger" for="campo-perfil"/>
+                    <h:selectOneMenu class="form-control" id="campo-perfil" value="#{usuarioBean.usuario.perfil.sq_perfil}">
+                        <f:selectItem id="item1" itemLabel="Administrador" itemValue="1" />
+                        <f:selectItem id="item2" itemLabel="Cliente" itemValue="2" />
+                    </h:selectOneMenu>
                 </div>
+
             </div>
             <!--fim campo perfil-->
 
