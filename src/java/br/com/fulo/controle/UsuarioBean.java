@@ -75,7 +75,7 @@ public class UsuarioBean {
             if (!usuario.getDs_senha().trim().equals(this.senha)) {
 
                 // apresenta mensagem de erro.
-                FacesContext.getCurrentInstance().getExternalContext().getFlash().put("erro", Mensagens.MSG0004);
+                ELFlash.getFlash().put("erro", Mensagens.MSG0004);
 
                 // retorna para o formulário.
                 return "/usuario/cadastrar.xhtml";
@@ -88,7 +88,7 @@ public class UsuarioBean {
             if (!pesquisa.isEmpty()) {
 
                 // apresenta mensagem de erro.
-                FacesContext.getCurrentInstance().getExternalContext().getFlash().put("erro", Mensagens.MSG0005);
+                ELFlash.getFlash().put("erro", Mensagens.MSG0005);
 
                 // retorna para o formulário.
                 return "/usuario/cadastrar.xhtml";
@@ -102,7 +102,7 @@ public class UsuarioBean {
             pessoa = new Pessoa();
 
             // apresenta mensagem de sucesso.
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("sucesso", Mensagens.MSG0001);
+            ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
 
             // retorna para o formulário.
             return "/usuario/cadastrar.xhtml";
@@ -207,7 +207,7 @@ public class UsuarioBean {
                 if (pessoa.getDs_email().equals(email.getDs_email()) && !pessoa.getDs_email().equals(antigos.getDs_email())) {
 
                     // apresenta mensagem de erro.
-                    FacesContext.getCurrentInstance().getExternalContext().getFlash().put("erro", Mensagens.MSG0005);
+                    ELFlash.getFlash().put("erro", Mensagens.MSG0005);
 
                     // retorna para o formulário.
                     return "/usuario/editar.xhtml";
@@ -219,7 +219,7 @@ public class UsuarioBean {
             business.editarUsuario(pessoa);
 
             // apresenta mensagem de sucesso.
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("sucesso", Mensagens.MSG0001);
+            ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
 
             // recupera a sessão;
             Pessoa sessao = (Pessoa) business.sessao();
@@ -262,7 +262,7 @@ public class UsuarioBean {
 
             business.removerUsuario(sq_usuario);
 
-            FacesContext.getCurrentInstance().getExternalContext().getFlash().put("sucesso", Mensagens.MSG0001);
+            ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
 
             return "/usuario/pesquisar?faces-redirect=true";
 

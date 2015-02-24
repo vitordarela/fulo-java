@@ -18,6 +18,7 @@ package br.com.fulo.controle;
 import br.com.fulo.business.UsuarioBusiness;
 import br.com.fulo.config.Mensagens;
 import br.com.fulo.modelo.Usuario;
+import com.sun.faces.context.flash.ELFlash;
 import java.io.IOException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -81,14 +82,14 @@ public class AutenticadorBean {
                 sessao.setAttribute("usuario", usuario);
 
                 // apresenta mensagem e retorna para a tela inicial.
-                FacesContext.getCurrentInstance().getExternalContext().getFlash().put("sucesso", Mensagens.MSG0001);
+                ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
                 return ("/index.xhtml");
 
             }
 
         }
 
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("erro", Mensagens.MSG0003);
+        ELFlash.getFlash().put("erro", Mensagens.MSG0003);
         return ("/index.xhtml");
 
     }
@@ -108,7 +109,7 @@ public class AutenticadorBean {
         HttpSession sessao = (HttpSession) externalContext.getSession(false);
         sessao.removeAttribute("usuario");
 
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("sucesso", Mensagens.MSG0001);
+        ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
 
         return "/index.xhtml";
 
