@@ -1,0 +1,64 @@
+<!--
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                <h4 class="modal-title" id="myModalLabel">Logoff</h4>
+            </div>
+
+            <div class="modal-body">
+                <span>Deseja fazer logoff?</span>
+            </div>
+
+            <div class="modal-footer">
+
+                <!--formulario-->
+                <h:form class="form-horizontal">
+
+                    <!--botões-->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+
+                            <h:commandLink class="btn btn-danger" value="Sim" action="#{autenticadorBean.registraSaida()}">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </h:commandLink>
+
+                            <button class="btn btn-default" data-dismiss="modal">Não <i class="glyphicon glyphicon-remove"></i></button>
+
+                        </div>
+                    </div>
+                    <!--botões-->
+
+                </h:form>
+                <!--fim formulario-->
+
+            </div>
+
+        </div>
+
+    </div>
+
+</ui:composition>
+

@@ -1,0 +1,254 @@
+<!--
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+        <!--container-->
+        <div class="container-fluid">
+
+            <!--botao de menu para mobile-->
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-targset="#dropdown-thumbnail-preview" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--fim botao de menu para mobile-->
+
+                <a class="navbar-brand hidden-xs" href="/fulo/index.xhtml"><h:graphicImage url="/imagens/fulo.png" /></a>
+                <a class="navbar-brand hidden-sm hidden-md hidden-lg" href="/fulo/index.xhtml"><h:graphicImage url="/imagens/fulo.png" />Menu</a>
+
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+
+                <!--botoes da esquerda-->
+                <ul class="nav navbar-nav">
+
+                    <!--botoes navbar-->
+                    <li class="active"><a href="/fulo/index.xhtml"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+
+                    <!--menu dropdown-->
+                    <li class="dropdown thumb-dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th"></i> Produtos<span class="caret"></span></a>
+
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li class="dropdown-header">Casa</li>
+
+                            <li>
+                                <a href="#">
+                                    Acessórios para Cozinha
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/acessoriocozinha.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Almofadas
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/almofadas.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Bolsas
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/bolsas.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Infatil</li>
+
+                            <li>
+                                <a href="#">
+                                    Cobreleitos
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/cobreleitos.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Kit Bebê
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/kitbebe.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Mantos para Sofá
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/mantossofa.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Mimos
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/mimos.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Panôs
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/panos.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Peso de Porta
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/pesoporta.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Porta Trecos
+                                    <div class="thumbnail hidden-xs">
+                                        <h:graphicImage class="img-responsive" url="/imagens/dropdown_menu/portatrecos.png" width="400" height="400"/>
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <!--fim dropdown-->
+
+                    <li><a href="#"><i class="glyphicon glyphicon-phone-alt"></i> Contato</a></li>
+
+                    <!--dropdown institucional-->
+                    <li class="dropdown thumb-dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-road"></i> Institucional<span class="caret"></span></a>
+
+                        <ul class="dropdown-menu" role="menu">
+
+                            <li><a href="#">Como tudo começou</a></li>
+                            <li><a href="#">Cuidados especiais</a></li>
+                            <li><a href="#">História do patchwork</a></li>
+
+                        </ul>
+
+                    </li>
+                    <!--dropdown institucional-->
+
+                    <!--fim botoes navbar-->
+                </ul>
+
+                <!--identificação do usuário logado-->
+                <ul class="nav navbar-nav">
+
+                    <li>
+
+                        <h:form>
+
+                            <h:commandLink class="btn navbar-btn text-info" rendered="#{(!empty(autenticadorBean.recuperaSessao()))}" action="#{usuarioBean.preparaEdicao()}">
+                                <f:param name="sq_usuario" value="#{autenticadorBean.recuperaSessao().getSq_usuario()}"></f:param>
+                                <i class="glyphicon glyphicon-user"></i>
+                                <strong><h:outputText value=" #{autenticadorBean.recuperaSessao().getDs_nome()}" /></strong>
+
+                            </h:commandLink>
+
+                        </h:form>
+
+                    </li>
+
+                </ul>
+                <!--identificação do usuário logado-->
+
+                <!--fim botoes da esquerda-->
+
+                <!--botoes da direita-->
+
+                <!--botao logoff-->
+                <h:panelGrid class="navbar-right" rendered="#{(!empty(autenticadorBean.recuperaSessao()))}">
+
+                    <a class="btn btn-success navbar-btn" data-toggle="modal" data-target="#modalLogoff">Sair <i class="glyphicon glyphicon-log-in"></i></a>
+
+                </h:panelGrid>
+                <!--botao logoff-->
+
+                <!--botao login-->
+                <h:panelGrid class="navbar-right" rendered="#{(empty(autenticadorBean.recuperaSessao()))}">
+
+                    <a class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#modalLogin">Login <i class="glyphicon glyphicon-log-in"></i></a>
+
+                </h:panelGrid>
+                <!--botao login-->
+
+                <!--fim botoes da direita-->
+
+            </div>
+            <!--nav-collapse -->
+
+        </div>
+        <!--fim container-->
+
+    </nav>
+    <!--fim navbar-->
+
+
+    <!--div para modal login-->
+    <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <!--define o lugar de renderização da modal-->
+
+        <!--faz include no arquivo de topo-->
+        <ui:include src="/autenticacao/login.xhtml"></ui:include>
+        <!--fim include-->
+
+    </div>
+    <!--fim div para modal login-->
+
+    <!--modal logoff-->
+    <div class="modal fade" id="modalLogoff" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <!--faz include no arquivo de topo-->
+        <ui:include src="/autenticacao/logoff.xhtml"></ui:include>
+        <!--fim include login-->
+
+    </div>
+    <!--modal logoff-->
+
+</ui:composition>
+

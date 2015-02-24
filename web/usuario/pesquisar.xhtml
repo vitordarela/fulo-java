@@ -1,0 +1,146 @@
+<!--
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<ui:composition template="/layout/padrao/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!--define a área do layout que será exibido-->
+    <ui:define name="conteudo">
+
+        <legend>Pesquisa de Usuário</legend>
+
+        <h:form class="form-horizontal">
+
+            <!--campo filtro-->
+            <div class="col-xs-5 col-sm-3 col-md-2">
+
+                <div class="form-group">
+
+                    <label class="checkbox-inline">
+                        <h:selectBooleanCheckbox value="option1" /> Nome
+                    </label>
+
+                    <label class="checkbox-inline">
+                        <h:selectBooleanCheckbox value="option2" /> Email
+                    </label>
+                </div>
+
+            </div>
+            <!--campo filtro-->
+
+            <!--campo pesquisar-->
+            <div class="col-xs-9 col-sm-4 col-md-4">
+
+                <div class="form-group">
+
+                    <div class="input-group">
+
+                        <h:inputText class="form-control" p:placeholder="Pesquisar por..." />
+
+                        <span class="input-group-btn">
+                            <h:commandLink class="btn btn-primary " value="Pesquisar" id="pesquisar">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </h:commandLink>
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!--campo pesquisar-->
+
+            <!--botões-->
+            <div class="col-xs-2 col-md-4">
+
+                <h:link class="btn btn-default" value="Cancelar" outcome="/index.xhtml">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </h:link>
+
+            </div>
+            <!--botões-->
+
+        </h:form>
+
+        <legend></legend>
+
+        <h:panelGroup rendered="{not empty usuarioBean.pesquisar()}">
+
+            <!--gera uma tabela para apresentar o resultado-->
+            <h:dataTable class="table table-hover table-striped" value="#{usuarioBean.pesquisar()}" var="pessoa">
+
+                <!--campo nome-->
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nome" />
+                    </f:facet>
+                    #{pessoa.ds_nome}
+                </h:column>
+                <!--campo nome-->
+
+                <!--campo email-->
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="E-mail" />
+                    </f:facet>
+                    #{pessoa.ds_email}
+                </h:column>
+                <!--campo email-->
+
+                <!--opções-->
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Opções" />
+                    </f:facet>
+
+                    <h:form>
+                        <!--editar-->
+                        <h:commandLink class="btn btn-success glyphicon glyphicon-edit" action="#{usuarioBean.preparaEdicao()}">
+                            <f:param name="sq_pessoa" value="#{pessoa.sq_pessoa}"></f:param>
+                        </h:commandLink>
+                        <!--editar-->
+
+                        <!--remover-->
+                        <a class="btn btn-danger glyphicon glyphicon-remove" data-toggle="modal" data-target="#modalExcluirUsuario" />
+                        <!--remover-->
+
+                        <!--div para modal excluir-->
+                        <div class="modal fade" id="modalExcluirUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                            <!--faz include do arquivo-->
+                            <ui:include src="/usuario/excluir.xhtml"></ui:include>
+                            <!--fim include-->
+
+                        </div>
+                        <!--div para modal excluir-->
+
+                    </h:form>
+
+                </h:column>
+                <!--opções-->
+
+            </h:dataTable>
+            <!--fim tabela-->
+
+        </h:panelGroup>
+
+    </ui:define>
+    <!--fim definicao-->
+
+</ui:composition>

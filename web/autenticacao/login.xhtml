@@ -1,0 +1,78 @@
+<!--
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!--scripts para a funcionalidade-->
+    <h:outputScript name="login.js" library="js/autenticacao" target="head" />
+    <!--scripts para a funcionalidade-->
+
+    <!--tamanho e alinhamento-->
+    <div class="col-sm-3 col-sm-offset-4">
+
+        <legend>Login
+            <i class="glyphicon glyphicon-log-in text-info"></i>
+            <a class="close pull-right text-info glyphicon" data-dismiss="modal">x</a>
+
+        </legend>
+
+        <!--formulario-->
+        <h:form class="form-horizontal" id="login">
+
+            <!--campo email-->
+            <div class="form-group">
+                <div id="div-email" class="col-sm-12">
+                    <h:inputText id="campo-email" value="#{autenticadorBean.ds_email}" class="form-control text-lowercase" p:placeholder="usuario@email.com"/>
+                    <h:message class="text-danger" for="campo-email"/>
+
+                    <!--mensagem de erro-->
+                    <span class="help-block hidden text-white" id="helpblock-email">O campo deve ser preenchido</span>
+                </div>
+            </div>
+            <!--fim campo email-->
+
+            <!--campo senha-->
+            <div class="form-group">
+                <div id="div-senha" class="col-sm-12">
+                    <h:inputSecret id="campo-senha" value="#{autenticadorBean.ds_senha}" class="form-control" p:placeholder="Senha"/>
+                    <h:message class="text-danger" for="campo-senha"/>
+                    <span class="help-block hidden text-white" id="helpblock-senha">O campo deve ser preenchido</span>
+                </div>
+            </div>
+            <!--fim campo senha-->
+
+            <!--botao submit-->
+            <div class="form-group">
+                <div class="col-sm-12">
+
+                    <h:commandLink id="entrar" class="btn btn-primary" value="Entrar" onclick="return Login.validaInputs()" action="#{autenticadorBean.autentica()}">
+                        <i class="glyphicon glyphicon-log-in"></i>
+                    </h:commandLink>
+
+                </div>
+            </div>
+            <!--fim botao submit-->
+
+        </h:form>
+        <!--fim formulario-->
+
+    </div>
+    <!--fim tamanho e alinhamento-->
+
+</ui:composition>
+

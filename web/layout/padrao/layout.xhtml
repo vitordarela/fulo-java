@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<!--
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!--configuracao-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <!--fim configuracao-->
+
+    <!--head-->
+    <h:head>
+
+        <title>Fulô Pathwork</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="shortcut icon" type="image/x-icon" href="imagens/favicon.ico" />
+
+    </h:head>
+    <!--fim head-->
+
+    <!--body-->
+    <h:body>
+
+        <!-- carga arquivos de CSS e JS.-->
+        <h:outputScript name="jquery-2.1.1.min.js" library="js" target="head" />
+        <h:outputStylesheet name="bootstrap.css" library="css" />
+        <h:outputStylesheet name="complemento.css" library="css" />
+        <h:outputScript name="bootstrap.min.js" library="js" target="head" />
+        <h:outputScript name="geral.js" library="js" target="head" />
+        <!-- fim carga arquivos de CSS e JS.-->
+
+        <!--container-->
+        <div class="container-fluid">
+
+            <!--faz include do navbar-->
+            <div class="col-sm-12">
+                <ui:include src="/layout/padrao/topo.xhtml" />
+            </div>
+            <!--faz include do navbar-->
+
+            <!--linha-->
+            <div class="row">
+
+                <!--flashmessages-->
+                <ui:include src="/layout/flash-messages.xhtml" />
+                <!--flashmessages-->
+
+                <!--conteudo-->
+                <div class="col-sm-12">
+                    <ui:insert name="conteudo" />
+                </div>
+                <!--fim conteudo-->
+
+                <!--rodape-->
+                <div class="col-sm-12" >
+                    <ui:include src="/layout/padrao/rodape.xhtml" />
+                </div>
+                <!--fim rodape-->
+
+            </div>
+            <!--fim linha-->
+
+        </div>
+        <!--fimcontainer-->
+
+    </h:body>
+    <!--fim body-->
+
+</html>

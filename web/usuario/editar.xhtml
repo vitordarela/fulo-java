@@ -1,0 +1,81 @@
+<!--
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<ui:composition template="/layout/padrao/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <!--seta o tamplate-->
+
+    <!--conteudo-->
+    <ui:define name="conteudo">
+
+        <legend>Editar Usuário</legend>
+
+        <h:form class="form-horizontal">
+
+            <!--campos hidden-->
+            <h:inputHidden value="#{usuarioBean.usuario.sq_usuario}" />
+            <h:inputHidden value="#{usuarioBean.usuario.ds_senha}" />
+            <!--campos hidden-->
+
+            <div class="form-group">
+                <h:outputLabel class="col-sm-2 control-label" value="Nome:" for="campo-nome" />
+
+                <div class="col-sm-4">
+                    <h:inputText class="form-control" p:placeholder="Nome e sobrenome" id="campo-nome" value="#{usuarioBean.usuario.ds_nome}">
+                    </h:inputText>
+
+                    <h:message class="text-danger" for="campo-nome"/>
+                </div>
+            </div>
+            <!--fim campo nome-->
+
+            <!--campo email-->
+            <div class="form-group">
+                <h:outputLabel class="col-sm-2 control-label" value="E-mail" for="campo-email" />
+
+                <div class="col-sm-4">
+                    <h:inputText class="form-control" p:placeholder="usuario@email.com" id="campo-email" value="#{usuarioBean.usuario.ds_email}"/>
+
+                    <h:message class="text-danger" for="campo-email"/>
+                </div>
+            </div>
+            <!--fim campo email-->
+
+            <!--botao cadastrar-->
+            <div class="form-group">
+
+                <div class="col-sm-offset-2 col-sm-10">
+                    <!--editar-->
+                    <h:commandLink class="btn btn-primary" value="Editar" action="#{usuarioBean.editar()}">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </h:commandLink>
+
+                    <!--cancelar-->
+                    <h:link class="btn btn-default" outcome="/index.xhtml" value="Cancelar">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </h:link>
+                </div>
+            </div>
+            <!--fim botao cadastrar-->
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
