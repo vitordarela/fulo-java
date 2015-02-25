@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -45,30 +46,14 @@ public class Usuario implements Serializable {
 
     @JoinColumn(name = "sq_perfil", referencedColumnName = "sq_perfil")
     @ManyToOne(optional = false)
-    private Perfil perfil;
+    public Perfil perfil;
 
     @JoinColumn(name = "sq_pessoa", referencedColumnName = "sq_pessoa", insertable = false, updatable = false)
     @OneToOne(optional = false)
+    @MapsId
     public Pessoa pessoa;
 
     public Usuario() {
-    }
-
-    public Usuario(Integer sq_pessoa) {
-        this.sq_pessoa = sq_pessoa;
-    }
-
-    public Usuario(Integer sq_pessoa, String ds_senha) {
-        this.sq_pessoa = sq_pessoa;
-        this.ds_senha = ds_senha;
-    }
-
-    public Integer getSq_pessoa() {
-        return sq_pessoa;
-    }
-
-    public void setSq_pessoa(Integer sq_pessoa) {
-        this.sq_pessoa = sq_pessoa;
     }
 
     public String getDs_senha() {
@@ -103,4 +88,11 @@ public class Usuario implements Serializable {
         this.confirma_senha = confirma_senha;
     }
 
+    public Integer getSq_pessoa() {
+        return sq_pessoa;
+    }
+
+    public void setSq_pessoa(Integer sq_pessoa) {
+        this.sq_pessoa = sq_pessoa;
+    }
 }

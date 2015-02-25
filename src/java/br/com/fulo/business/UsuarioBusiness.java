@@ -15,7 +15,6 @@
  */
 package br.com.fulo.business;
 
-import br.com.fulo.modelo.Pessoa;
 import br.com.fulo.modelo.Usuario;
 import br.com.fulo.repositorio.UsuarioRepositorio;
 import java.util.List;
@@ -55,13 +54,13 @@ public class UsuarioBusiness extends AbstractBusiness {
      * @date Jan 14, 2015
      * @version 1.0
      */
-    public void cadastrarUsuario(Pessoa pessoa, Usuario usuario) throws Exception {
+    public void cadastrarUsuario(Usuario usuario) throws Exception {
 
         // critografa a senha com md5.
         usuario.setDs_senha(converteMD5(usuario.getDs_senha()));
 
         //envia para o repositorio.
-        repositorio.cadastra(pessoa, usuario);
+        repositorio.cadastra(usuario);
     }
 
     /**
@@ -92,7 +91,7 @@ public class UsuarioBusiness extends AbstractBusiness {
      * @return List Dados de todos os usuários
      * @version 1.0
      */
-    public List<Pessoa> pesquisarUsuarios() throws Exception {
+    public List<Usuario> pesquisarUsuarios() throws Exception {
 
         return repositorio.pesquisa();
     }
@@ -118,7 +117,7 @@ public class UsuarioBusiness extends AbstractBusiness {
      *
      * @name editarUsuario
      * @author Victor Eduardo Barreto
-     * @param pessoa Dados de usuário
+     * @param usuario Dados de usuário
      * @throws java.lang.Exception
      * @date Jan 29, 2015
      * @version 1.0

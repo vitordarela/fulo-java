@@ -56,27 +56,20 @@ public class UsuarioRepositorio {
      * @name adiciona
      * @author Victor Eduardo Barreto
      * @throws java.lang.Exception
-     * @param pessoa
+     * @param usuario Dados de usuario
      * @date Nov 4, 2014
      * @version 1.0
      */
-    public void cadastra(Pessoa pessoa, Usuario usuario) throws Exception {
+    public void cadastra(Usuario usuario) throws Exception {
 
         try {
 
             // inicia transação.
             manager.getTransaction().begin();
 
-            // insere pessoa.
-            manager.persist(pessoa);
-
-            // pega sq_pessoa.
-            usuario.setSq_pessoa(pessoa.getSq_pessoa());
-
-            // persiste usuario.
+            // insere usuario.
             manager.persist(usuario);
 
-            // commita.
             manager.getTransaction().commit();
 
         } catch (Exception exception) {
@@ -107,7 +100,7 @@ public class UsuarioRepositorio {
      * @return List Dados de todos os usuários
      * @version 1.0
      */
-    public List<Pessoa> pesquisa() throws Exception {
+    public List<Usuario> pesquisa() throws Exception {
 
         List retorno;
 
@@ -115,7 +108,7 @@ public class UsuarioRepositorio {
         try {
 
             // monta a query com entity manager.
-            Query query = manager.createQuery("SELECT p FROM Pessoa p");
+            Query query = manager.createQuery("SELECT u FROM Usuario u");
 
             // salva o resultado.
             retorno = query.getResultList();
@@ -186,7 +179,7 @@ public class UsuarioRepositorio {
      *
      * @name edita
      * @author Victor Eduardo Barreto
-     * @param pessoa
+     * @param usuario
      * @throws java.lang.Exception
      * @date Jan 29, 2015
      * @version 1.0
@@ -203,10 +196,9 @@ public class UsuarioRepositorio {
 
             // commita.
             manager.getTransaction().commit();
+            manager.flush();
 
         } catch (Exception exception) {
-
-            // se der erro, faz rollback.
             manager.getTransaction().rollback();
 
             // lança exceção.

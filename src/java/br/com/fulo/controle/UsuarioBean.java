@@ -41,7 +41,6 @@ public class UsuarioBean {
 
     // instancia a classe usuario e pessoa.
     private Usuario usuario = new Usuario();
-    private Pessoa pessoa = new Pessoa();
 
     public UsuarioBean() {
         usuario.setPerfil(new Perfil());
@@ -76,7 +75,7 @@ public class UsuarioBean {
             }
 
             // pesquisa email informado.
-            List pesquisa = business.verificaEmailCadastrado(pessoa.getDs_email());
+            List pesquisa = business.verificaEmailCadastrado(usuario.pessoa.getDs_email());
 
             // verifica resultado da comparação.
             if (!pesquisa.isEmpty()) {
@@ -90,10 +89,9 @@ public class UsuarioBean {
             }
 
             // manda dados para a business
-            business.cadastrarUsuario(pessoa, usuario);
+            business.cadastrarUsuario(usuario);
 
             // instancia um novo usuario para não popular o formulário com dados antigos.
-            pessoa = new Pessoa();
             usuario = new Usuario();
 
             // apresenta mensagem de sucesso.
@@ -120,7 +118,7 @@ public class UsuarioBean {
      * @return List Usuários cadastrados
      * @version 1.0
      */
-    public List<Pessoa> pesquisar() throws Exception {
+    public List<Usuario> pesquisar() throws Exception {
 
         List resultado = business.pesquisarUsuarios();
 
@@ -161,7 +159,6 @@ public class UsuarioBean {
             setUsuario(resultado);
 
             return "/usuario/editar.xhtml";
-
         } catch (Exception exception) {
 
             throw exception;
@@ -182,10 +179,17 @@ public class UsuarioBean {
      */
     public String editar() throws Exception {
 
+        usuario = getUsuario();
+
+        usuario.pessoa.setDs_email("victor.edaurdo@gmail.com");
+        usuario.pessoa.setDs_nome("victor.edaurdo@gmail.com");
+        usuario.setDs_senha("123456");
+        usuario.setConfirma_senha("123456");
+
         try {
 
             // pesquisa se o email informado existe no banco.
-            List pesquisa = business.verificaEmailCadastrado(pessoa.getDs_email());
+            List pesquisa = business.verificaEmailCadastrado(usuario.pessoa.getDs_email());
 
             // se nao tiver resultado deixa passar.
             if (!pesquisa.isEmpty()) {
@@ -210,7 +214,6 @@ public class UsuarioBean {
 
                 }
             }
-
             // manda dados para a business
             business.editarUsuario(usuario);
 
@@ -218,16 +221,15 @@ public class UsuarioBean {
             ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
 
             // recupera a sessão;
-            Pessoa sessao = (Pessoa) business.sessao();
+            Usuario sessao = (Usuario) business.sessao();
 
             // verifica se o usuário está alterando ele mesmo e muda o redirect.
-            if (!pessoa.getSq_pessoa().equals(sessao.getSq_pessoa())) {
-
-                // retorna para pesquisa
-                return "/usuario/pesquisar?faces-redirect=true";
-
-            }
-
+//            if (!usuario.getSq_pessoa().equals(sessao.getSq_pessoa())) {
+//
+//                // retorna para pesquisa
+//                return "/usuario/pesquisar?faces-redirect=true";
+//
+//            }
             // retorna para index.
             return "/index?faces-redirect=true";
 
@@ -276,14 +278,6 @@ public class UsuarioBean {
 
     public void setBusiness(UsuarioBusiness business) {
         this.business = business;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public Usuario getUsuario() {
