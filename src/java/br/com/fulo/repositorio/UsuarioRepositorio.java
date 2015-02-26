@@ -16,7 +16,6 @@
 package br.com.fulo.repositorio;
 
 import br.com.fulo.config.Conexao;
-import br.com.fulo.modelo.Pessoa;
 import br.com.fulo.modelo.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -32,9 +31,6 @@ import javax.persistence.Query;
  */
 public class UsuarioRepositorio {
 
-    // variavel para receber a conexão.
-    private final EntityManager manager;
-
     /**
      * Método responsável pela construção da classe
      *
@@ -45,14 +41,11 @@ public class UsuarioRepositorio {
      */
     public UsuarioRepositorio() {
 
-        // recebe a conexão na variavel manager.
-        manager = Conexao.getEntityManager();
     }
 
     /**
      * Método responsável por adicionar usuário
      *
-     * @param usuario
      * @name adiciona
      * @author Victor Eduardo Barreto
      * @throws java.lang.Exception
@@ -61,6 +54,8 @@ public class UsuarioRepositorio {
      * @version 1.0
      */
     public void cadastra(Usuario usuario) throws Exception {
+
+        EntityManager manager = Conexao.getEntityManager();
 
         try {
 
@@ -71,6 +66,7 @@ public class UsuarioRepositorio {
             manager.persist(usuario);
 
             manager.getTransaction().commit();
+            manager.close();
 
         } catch (Exception exception) {
 
@@ -102,16 +98,20 @@ public class UsuarioRepositorio {
      */
     public List<Usuario> pesquisa() throws Exception {
 
+        EntityManager manager = Conexao.getEntityManager();
+
         List retorno;
 
-        // executa a query.
         try {
+
+            manager.getTransaction().begin();
 
             // monta a query com entity manager.
             Query query = manager.createQuery("SELECT u FROM Usuario u");
 
             // salva o resultado.
             retorno = query.getResultList();
+            manager.close();
 
         } catch (Exception exception) {
             throw exception;
@@ -134,8 +134,13 @@ public class UsuarioRepositorio {
      */
     public List verificaEmail(String ds_email) throws Exception {
 
-        // exexuta a query.
+        List retorno;
+
+        EntityManager manager = Conexao.getEntityManager();
+
         try {
+
+            manager.getTransaction().begin();
 
             // monta a query com entity manager.
             Query query = manager.createQuery("SELECT u FROM Usuario u WHERE u.pessoa.ds_email = :ds_email");
@@ -144,12 +149,14 @@ public class UsuarioRepositorio {
             query.setParameter("ds_email", ds_email);
 
             // salva o resultado.
-            return query.getResultList();
+            retorno = query.getResultList();
+            manager.close();
 
         } catch (Exception exception) {
             throw exception;
         }
 
+        return retorno;
     }
 
     /**
@@ -165,12 +172,22 @@ public class UsuarioRepositorio {
      */
     public Usuario pesquisaPorId(Integer sq_pessoa) throws Exception {
 
+        Usuario retorno;
+
+        EntityManager manager = Conexao.getEntityManager();
+
         try {
 
-            return manager.find(Usuario.class, sq_pessoa);
+            manager.getTransaction().begin();
+
+            retorno = manager.find(Usuario.class, sq_pessoa);
+            manager.close();
+
         } catch (Exception exception) {
             throw exception;
         }
+
+        return retorno;
 
     }
 
@@ -186,17 +203,18 @@ public class UsuarioRepositorio {
      */
     public void edita(Usuario usuario) throws Exception {
 
+        EntityManager manager = Conexao.getEntityManager();
+
         try {
 
-            // inicia transação.
             manager.getTransaction().begin();
 
-            // atualiza usuário.
-            manager.merge(usuario);
+            System.err.println(usuario.pessoa.getDs_nome());
 
-            // commita.
-            manager.getTransaction().commit();
+            manager.merge(usuario);
             manager.flush();
+
+            manager.getTransaction().commit();
 
         } catch (Exception exception) {
             manager.getTransaction().rollback();
@@ -226,6 +244,8 @@ public class UsuarioRepositorio {
      */
     public void remove(Usuario usuario) throws Exception {
 
+        EntityManager manager = Conexao.getEntityManager();
+
         try {
 
             // inicia transação.
@@ -236,6 +256,7 @@ public class UsuarioRepositorio {
 
             // commita.
             manager.getTransaction().commit();
+            manager.close();
 
         } catch (Exception exception) {
 

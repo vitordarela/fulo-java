@@ -23,8 +23,8 @@ import br.com.fulo.modelo.Usuario;
 import com.sun.faces.context.flash.ELFlash;
 import java.util.List;
 import java.util.Map;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -36,7 +36,7 @@ import javax.faces.context.FacesContext;
  * @version 1.0
  */
 @ManagedBean
-@RequestScoped
+@ApplicationScoped
 public class UsuarioBean {
 
     // instancia a classe usuario e pessoa.
@@ -154,11 +154,11 @@ public class UsuarioBean {
 
         try {
 
-            Usuario resultado = business.buscarDadosId(sq_pessoa);
-
-            setUsuario(resultado);
+            this.usuario = business.buscarDadosId(sq_pessoa);
 
             return "/usuario/editar.xhtml";
+//            return "/usuario/editar?faces-redirect=true";
+
         } catch (Exception exception) {
 
             throw exception;
@@ -179,29 +179,34 @@ public class UsuarioBean {
      */
     public String editar() throws Exception {
 
-        usuario = getUsuario();
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 
-        usuario.pessoa.setDs_email("victor.edaurdo@gmail.com");
-        usuario.pessoa.setDs_nome("victor.edaurdo@gmail.com");
-        usuario.setDs_senha("123456");
-        usuario.setConfirma_senha("123456");
+        // verifica se tem parametro.
+        if (params.get("sq_pessoa") != null) {
+
+            Integer sq_pessoa = Integer.parseInt(params.get("sq_pessoa"));
+            this.usuario = business.buscarDadosId(sq_pessoa);
+
+            // redireciona para o form de edição.
+            return "/usuario/editar?faces-redirect=true";
+        }
 
         try {
 
+            System.err.println(usuario.pessoa.getDs_email());
             // pesquisa se o email informado existe no banco.
             List pesquisa = business.verificaEmailCadastrado(usuario.pessoa.getDs_email());
 
-            // se nao tiver resultado deixa passar.
+            // se nao tiver resultado deixa passar
             if (!pesquisa.isEmpty()) {
-
-                // pega o id de pessoa.
-                Integer sq_pessoa = usuario.getSq_pessoa();
-
-                // pesquisa dados antigos.
-                Usuario antigos = business.buscarDadosId(sq_pessoa);
 
                 // pega email do banco.
                 Usuario email = (Usuario) pesquisa.get(0);
+
+                System.err.println(email);
+
+                // pesquisa dados antigos.
+                Usuario antigos = business.buscarDadosId(usuario.pessoa.getSq_pessoa());
 
                 // compara emails.
                 if (usuario.pessoa.getDs_email().equals(email.pessoa.getDs_email()) && !usuario.pessoa.getDs_email().equals(antigos.pessoa.getDs_email())) {
@@ -214,8 +219,9 @@ public class UsuarioBean {
 
                 }
             }
+
             // manda dados para a business
-            business.editarUsuario(usuario);
+            business.editarUsuario(this.usuario);
 
             // apresenta mensagem de sucesso.
             ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
@@ -224,12 +230,13 @@ public class UsuarioBean {
             Usuario sessao = (Usuario) business.sessao();
 
             // verifica se o usuário está alterando ele mesmo e muda o redirect.
-//            if (!usuario.getSq_pessoa().equals(sessao.getSq_pessoa())) {
-//
-//                // retorna para pesquisa
-//                return "/usuario/pesquisar?faces-redirect=true";
-//
-//            }
+            if (!usuario.getSq_pessoa().equals(sessao.getSq_pessoa())) {
+
+                // retorna para pesquisa
+                return "/usuario/pesquisar?faces-redirect=true";
+
+            }
+
             // retorna para index.
             return "/index?faces-redirect=true";
 
