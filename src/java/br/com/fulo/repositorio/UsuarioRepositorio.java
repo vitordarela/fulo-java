@@ -209,12 +209,10 @@ public class UsuarioRepositorio {
 
             manager.getTransaction().begin();
 
-            System.err.println(usuario.pessoa.getDs_nome());
-
             manager.merge(usuario);
-            manager.flush();
 
             manager.getTransaction().commit();
+            manager.close();
 
         } catch (Exception exception) {
             manager.getTransaction().rollback();

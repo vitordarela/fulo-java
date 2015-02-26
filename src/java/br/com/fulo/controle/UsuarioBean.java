@@ -156,8 +156,7 @@ public class UsuarioBean {
 
             this.usuario = business.buscarDadosId(sq_pessoa);
 
-            return "/usuario/editar.xhtml";
-//            return "/usuario/editar?faces-redirect=true";
+            return "/usuario/editar?faces-redirect=true";
 
         } catch (Exception exception) {
 
@@ -185,7 +184,7 @@ public class UsuarioBean {
         if (params.get("sq_pessoa") != null) {
 
             Integer sq_pessoa = Integer.parseInt(params.get("sq_pessoa"));
-            this.usuario = business.buscarDadosId(sq_pessoa);
+            usuario = business.buscarDadosId(sq_pessoa);
 
             // redireciona para o form de edição.
             return "/usuario/editar?faces-redirect=true";
@@ -193,7 +192,6 @@ public class UsuarioBean {
 
         try {
 
-            System.err.println(usuario.pessoa.getDs_email());
             // pesquisa se o email informado existe no banco.
             List pesquisa = business.verificaEmailCadastrado(usuario.pessoa.getDs_email());
 
@@ -202,8 +200,6 @@ public class UsuarioBean {
 
                 // pega email do banco.
                 Usuario email = (Usuario) pesquisa.get(0);
-
-                System.err.println(email);
 
                 // pesquisa dados antigos.
                 Usuario antigos = business.buscarDadosId(usuario.pessoa.getSq_pessoa());
@@ -221,7 +217,7 @@ public class UsuarioBean {
             }
 
             // manda dados para a business
-            business.editarUsuario(this.usuario);
+            business.editarUsuario(usuario);
 
             // apresenta mensagem de sucesso.
             ELFlash.getFlash().put("sucesso", Mensagens.MSG0001);
